@@ -1,7 +1,7 @@
 ---
 title: "Meghalaya 2023"
 description: "The Cloud Abode"
-thumbnail: "https://cdn.jsdelivr.net/gh/harsh-nahar/assets@main/gallery/gallery/meghalaya_2023/khasihills.webp"
+thumbnail: "https://cdn.jsdelivr.net/gh/harsh-nahar/assets@main/gallery/meghalaya_2023/khasihills.webp"
 date: 2023-11-25
 ---
 
@@ -12,9 +12,9 @@ Sitting in the North-Eastern region of India, Meghalaya is known to have the wet
 To view the images in high resolution, check out my Behance project - **[Meghalaya 2023](https://www.behance.net/gallery/186557681/Meghalaya-2023)**
 
 
-![Shillong Cityscape](https://cdn.jsdelivr.net/gh/harsh-nahar/assets@main/gallery/gallery/meghalaya_2023/shillong_citypano.webp)
+![Shillong Cityscape](https://cdn.jsdelivr.net/gh/harsh-nahar/assets@main/gallery/meghalaya_2023/shillong_citypano.webp)
 
-![Khasi Hills](https://cdn.jsdelivr.net/gh/harsh-nahar/assets@main/gallery/gallery/meghalaya_2023/khasihills.webp)
+![Khasi Hills](https://cdn.jsdelivr.net/gh/harsh-nahar/assets@main/gallery/meghalaya_2023/khasihills.webp)
 
 ![Hills in Cherrapunji](https://cdn.jsdelivr.net/gh/harsh-nahar/assets@main/gallery/meghalaya_2023/cherrapunji_hills.webp)
 
@@ -29,4 +29,3 @@ To view the images in high resolution, check out my Behance project - **[Meghala
 ![A lone house in Cherrapunji](https://cdn.jsdelivr.net/gh/harsh-nahar/assets@main/gallery/meghalaya_2023/cherrapunji_openland.webp)
 
 Thank you for your time.
-
