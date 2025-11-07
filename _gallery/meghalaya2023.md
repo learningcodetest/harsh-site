@@ -1,11 +1,9 @@
 ---
 title: "Meghalaya 2023"
-description: "The Cloud Abode"
+description: "मेघालय/Meghalaya - The Cloud Abode"
 thumbnail: "https://cdn.jsdelivr.net/gh/harsh-nahar/assets@main/gallery/meghalaya_2023/khasihills.webp"
 date: 2023-11-25
 ---
-
-मेघालय/Meghalaya - The Cloud Abode
 
 Sitting in the North-Eastern region of India, Meghalaya is known to have the wettest place on Earth - Cherrapunji. It also houses one of the cleanest villages in Asia, multiple ethnic tribes with unique cultures.
 
