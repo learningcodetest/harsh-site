@@ -3,7 +3,7 @@ baseurl: ""
 title: "harsh nahar"
 permalink: /blog/:title/
 
-# Blog posts
+# Blog posts defaults
 defaults:
   - scope:
       path: ""
@@ -11,7 +11,7 @@ defaults:
     values:
       layout: "post"
 
-# Gallery collection
+# Gallery collection defaults
 collections:
   gallery:
     output: true
@@ -22,5 +22,4 @@ defaults:
       path: ""
       type: "gallery"
     values:
-      layout: "gallery"
-
+      layout: "gallery_posts"
