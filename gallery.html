@@ -1,68 +1,41 @@
 ---
 layout: default
-title: "Photo Gallery"
+title: "Photography"
 ---
 
-<div class="full-bg">
-  <div class="container post-container">
-    <div class="gallery-header gallery-header-center">
-      <a href="{{ '/' | relative_url }}" class="back-link">&lt; home</a>
-      <!-- <h1 class="page-title">Photo Gallery</h1> -->
-      <!-- removed the above line as it did not look good on phone screens -->
+<div class="fade-in">
+    <div class="mb-12">
+        <h1 class="text-3xl font-bold mb-2 dark:text-white">Photography</h1>
+        <p class="text-[#86868b] dark:text-gray-400">Collections from the road. For high-res, visit <a href="https://www.behance.net/hrsvnr" target="_blank" class="text-blue-600 hover:underline">Behance</a>.</p>
     </div>
 
-    <h2 class="page-desc">Collections of photographs and stories.</h2>
-
-    <h3 class="external-link">
-      For high-resolution photo series, visit my
-      <a href="https://www.behance.net/hrsvnr" target="_blank" rel="noopener">Behance portfolio</a>.
-    </h3>
-
-    <section class="gallery-list" id="galleryList">
+    <div class="grid grid-cols-1 gap-12">
       {% assign galleries = site.gallery | sort: "date" | reverse %}
       {% for gallery in galleries %}
         {% assign thumb = gallery.thumbnail %}
         {% if thumb == nil %}
-          {% assign first_img = gallery.content | regex_replace: ".*?!\\[[^)]*\\]\\(([^)]*)\\).*", "\\1" %}
-          {% assign thumb = first_img %}
+            {% assign first_img = gallery.content | regex_replace: ".*?!\\[[^)]*\\]\\(([^)]*)\\).*", "\\1" %}
+            {% assign thumb = first_img %}
         {% endif %}
-        <a href="{{ gallery.url | relative_url }}" class="gallery-card">
-          {% if thumb %}
-            <img src="{{ thumb | relative_url }}" alt="{{ gallery.title }}" loading="lazy">
-          {% endif %}
-          <div class="gallery-info">
-            <h2>{{ gallery.title }}</h2>
-            {% if gallery.date %}
-              <p class="gallery-date">{{ gallery.date | date: "%b %Y" }}</p>
-            {% endif %}
-            {% if gallery.description %}
-              <p>{{ gallery.description }}</p>
-            {% endif %}
-          </div>
+        
+        <a href="{{ gallery.url | relative_url }}" class="group cursor-pointer block">
+            <div class="overflow-hidden rounded-2xl mb-4 bg-gray-100 dark:bg-white/5 relative aspect-[3/2] shadow-sm hover:shadow-md transition-all">
+                {% if thumb %}
+                <img src="{{ thumb | relative_url }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" alt="{{ gallery.title }}" loading="lazy">
+                {% else %}
+                <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-800 text-gray-400">No Image</div>
+                {% endif %}
+            </div>
+            <div class="flex justify-between items-start">
+                <div>
+                    <h3 class="text-lg font-semibold text-[#1d1d1f] dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{{ gallery.title }}</h3>
+                    <p class="text-[#86868b] dark:text-gray-400 text-sm">{{ gallery.description }}</p>
+                </div>
+                {% if gallery.date %}
+                <span class="font-mono text-xs bg-gray-50 dark:bg-white/10 px-2 py-1 rounded text-[#86868b] dark:text-gray-300 h-fit">{{ gallery.date | date: "%Y" }}</span>
+                {% endif %}
+            </div>
         </a>
       {% endfor %}
-    </section>
-
-    <button id="showMore" class="show-more">Show More</button>
-  </div>
+    </div>
 </div>
-
-<script>
-  // "Show More" functionality
-  const items = Array.from(document.querySelectorAll(".gallery-card"));
-  const btn = document.getElementById("showMore");
-  let visible = 6; // show first 6 initially
-
-  function updateVisibility() {
-    items.forEach((item, i) => {
-      item.style.display = i < visible ? "flex" : "none";
-    });
-    btn.style.display = visible < items.length ? "block" : "none";
-  }
-
-  updateVisibility();
-  btn.addEventListener("click", () => {
-    visible += 6;
-    updateVisibility();
-  });
-</script>
