@@ -1,13 +1,46 @@
 ---
 layout: default
 ---
-<div class="fade-in">
-    <div class="mb-12">
-        <h1 class="text-3xl font-bold mb-2 dark:text-white">Photography</h1>
-        <p class="text-[#86868b] dark:text-gray-400">Collections from the road.</p>
-    </div>
+<article class="fade-in">
+    <!-- Gallery Post Header -->
+    <header class="mb-10">
+        <a href="{{ '/gallery/' | relative_url }}" class="mb-6 text-sm font-medium text-[#86868b] hover:text-black dark:hover:text-white transition-colors flex items-center gap-1 w-fit">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Collections
+        </a>
+        
+        <h1 class="text-3xl md:text-4xl font-bold mb-4 leading-tight text-[#1d1d1f] dark:text-white">{{ page.title }}</h1>
+        
+        <div class="flex items-center justify-between border-b border-gray-100 dark:border-white/10 pb-6">
+            <time class="font-mono text-xs text-[#86868b]">{{ page.date | date: "%b %Y" }}</time>
+            
+            <!-- Share Button -->
+            <button onclick="sharePost()" class="group flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-50 dark:bg-white/10 hover:bg-gray-100 dark:hover:bg-white/20 transition-colors cursor-pointer">
+                <i data-lucide="share" class="w-3.5 h-3.5 text-gray-600 dark:text-gray-300"></i>
+                <span id="share-text" class="text-xs font-medium text-gray-600 dark:text-gray-300">Share</span>
+            </button>
+        </div>
+    </header>
 
-    <div class="grid grid-cols-1 gap-12">
-      {{ content }}
+    <!-- Content -->
+    <div class="prose prose-lg dark:prose-invert max-w-none">
+        {{ content }}
     </div>
-</div>
+</article>
+
+<script>
+async function sharePost() {
+    const url = window.location.href;
+    const title = document.title;
+    const shareText = document.getElementById('share-text');
+    if (navigator.share) {
+        try { await navigator.share({ title, url }); } catch (err) {}
+    } else {
+        try {
+            await navigator.clipboard.writeText(url);
+            const original = shareText.innerText;
+            shareText.innerText = "Copied!";
+            setTimeout(() => shareText.innerText = original, 2000);
+        } catch (err) {}
+    }
+}
+</script>
