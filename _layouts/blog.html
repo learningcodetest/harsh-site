@@ -1,30 +1,23 @@
 ---
 layout: default
 ---
+<div class="fade-in">
+    <div class="mb-12">
+        <h1 class="text-3xl font-bold mb-2 dark:text-white">Writing</h1>
+        <p class="text-[#86868b] dark:text-gray-400">Thoughts and essays.</p>
+    </div>
 
-<div class="container blog-container">
-  <div class="header-bar">
-    <a href="{{ '/' | relative_url }}" class="back-home">&lt; home</a>
-    <input type="search" id="search" class="search" placeholder="Search posts…">
-  </div>
-
-  <ul class="post-list" id="postList">
-    {% for post in site.posts %}
-    <li>
-      <a href="{{ post.url }}" class="post-link">
-        <h3>{{ post.title }}</h3>
-        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-      </a>
-    </li>
-    {% endfor %}
-  </ul>
+    <div class="space-y-10">
+        {% for post in site.posts %}
+        <a href="{{ post.url | relative_url }}" class="group block">
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2 gap-1">
+                <h2 class="text-xl font-semibold text-[#1d1d1f] dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{{ post.title }}</h2>
+                <time class="font-mono text-xs text-[#86868b] whitespace-nowrap">{{ post.date | date: "%b %-d, %Y" }}</time>
+            </div>
+            <p class="text-base text-[#86868b] dark:text-gray-400 leading-relaxed line-clamp-2">
+                {{ post.excerpt | strip_html | truncatewords: 20 }}
+            </p>
+        </a>
+        {% endfor %}
+    </div>
 </div>
-
-<script>
-  document.getElementById('search').addEventListener('input', function(e) {
-    var filter = e.target.value.toLowerCase();
-    document.querySelectorAll('#postList .post-link').forEach(function(link) {
-      link.parentNode.style.display = link.textContent.toLowerCase().includes(filter) ? 'block' : 'none';
-    });
-  });
-</script>
