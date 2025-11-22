@@ -3,7 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Social Preview Meta Tags -->
   <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | truncate: 160 }}">
+  
+  <!-- Open Graph / Facebook / iMessage -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+  <meta property="og:description" content="{{ page.excerpt | default: site.description | strip_html | truncate: 160 }}">
+  {% if page.image %}
+  <meta property="og:image" content="{{ page.image | absolute_url }}">
+  {% else %}
+  <!-- Fallback image: Change this URL to a real image in your assets folder -->
+  <meta property="og:image" content="{{ '/assets/default-share.png' | absolute_url }}">
+  {% endif %}
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="{{ page.url | absolute_url }}">
+  <meta property="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+  <meta property="twitter:description" content="{{ page.excerpt | default: site.description | strip_html | truncate: 160 }}">
+  {% if page.image %}
+  <meta property="twitter:image" content="{{ page.image | absolute_url }}">
+  {% endif %}
 
   <!-- Tailwind CSS & Typography Plugin -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -50,7 +74,7 @@
   <!-- NAVIGATION: Hidden if page.layout == 'home' -->
   {% unless page.layout == 'home' %}
   <nav class="fixed top-0 w-full z-50 glass-nav">
-    <div class="max-w-2xl mx-auto px-6 h-16 flex items-center justify-between">
+    <div class="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
       <a href="{{ '/' | relative_url }}" class="text-lg font-semibold tracking-tight hover:opacity-70 transition-opacity whitespace-nowrap">harsh nahar</a>
       <div class="flex items-center gap-6">
         <div class="hidden sm:flex gap-6 text-sm font-medium text-[#86868b] dark:text-gray-400">
@@ -73,8 +97,8 @@
   </nav>
   {% endunless %}
 
-  <!-- MAIN CONTENT -->
-  <main class="flex-grow w-full max-w-2xl mx-auto px-6 py-12 {% unless page.layout == 'home' %}mt-24{% endunless %}">
+  <!-- MAIN CONTENT: Increased width to max-w-3xl -->
+  <main class="flex-grow w-full max-w-3xl mx-auto px-6 py-12 {% unless page.layout == 'home' %}mt-24{% endunless %}">
     {{ content }}
   </main>
 
