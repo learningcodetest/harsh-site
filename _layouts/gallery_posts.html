@@ -1,39 +1,41 @@
 ---
 layout: default
+title: "Photography"
 ---
-<article class="fade-in">
-    <header class="mb-8">
-        <h1 class="text-3xl md:text-4xl font-bold mb-4 leading-tight text-[#1d1d1f] dark:text-white">{{ page.title }}</h1>
-        
-        <div class="flex items-center justify-between border-b border-gray-100 dark:border-white/10 pb-4">
-            <time class="font-mono text-xs text-[#86868b]">{{ page.date | date: "%b %Y" }}</time>
-            
-            <button onclick="sharePost()" class="group flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gray-50 dark:bg-white/10 hover:bg-gray-100 dark:hover:bg-white/20 transition-colors cursor-pointer">
-                <i data-lucide="share" class="w-3 h-3 text-gray-500 dark:text-gray-300"></i>
-                <span id="share-text" class="text-[10px] font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wide">Share</span>
-            </button>
-        </div>
-    </header>
 
-    <div class="prose prose-lg dark:prose-invert max-w-none">
-        {{ content }}
+<div class="fade-in">
+    <div class="mb-12">
+        <h1 class="text-3xl font-bold mb-2 dark:text-white">Photography</h1>
+        <p class="text-[#86868b] dark:text-gray-400">Collections from the road. For high-res, visit <a href="https://www.behance.net/hrsvnr" target="_blank" class="text-blue-600 hover:underline">Behance</a>.</p>
     </div>
-</article>
 
-<script>
-async function sharePost() {
-    const url = window.location.href;
-    const title = document.title;
-    const shareText = document.getElementById('share-text');
-    if (navigator.share) {
-        try { await navigator.share({ title, url }); } catch (err) {}
-    } else {
-        try {
-            await navigator.clipboard.writeText(url);
-            const original = shareText.innerText;
-            shareText.innerText = "COPIED";
-            setTimeout(() => shareText.innerText = original, 2000);
-        } catch (err) {}
-    }
-}
-</script>
+    <div class="grid grid-cols-1 gap-12">
+      {% assign galleries = site.gallery | sort: "date" | reverse %}
+      {% for gallery in galleries %}
+        {% assign thumb = gallery.thumbnail %}
+        {% if thumb == nil %}
+            {% assign first_img = gallery.content | regex_replace: ".*?!\\[[^)]*\\]\\(([^)]*)\\).*", "\\1" %}
+            {% assign thumb = first_img %}
+        {% endif %}
+        
+        <a href="{{ gallery.url | relative_url }}" class="group cursor-pointer block">
+            <div class="overflow-hidden rounded-2xl mb-4 bg-gray-100 dark:bg-white/5 relative aspect-[3/2] shadow-sm hover:shadow-md transition-all">
+                {% if thumb %}
+                <img src="{{ thumb | relative_url }}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" alt="{{ gallery.title }}" loading="lazy">
+                {% else %}
+                <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-800 text-gray-400">No Image</div>
+                {% endif %}
+            </div>
+            <div class="flex justify-between items-start">
+                <div>
+                    <h3 class="text-lg font-semibold text-[#1d1d1f] dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{{ gallery.title }}</h3>
+                    <p class="text-[#86868b] dark:text-gray-400 text-sm">{{ gallery.description }}</p>
+                </div>
+                {% if gallery.date %}
+                <span class="font-mono text-xs bg-gray-50 dark:bg-white/10 px-2 py-1 rounded text-[#86868b] dark:text-gray-300 h-fit">{{ gallery.date | date: "%Y" }}</span>
+                {% endif %}
+            </div>
+        </a>
+      {% endfor %}
+    </div>
+</div>
