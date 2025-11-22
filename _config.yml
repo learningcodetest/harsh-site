@@ -11,15 +11,16 @@ defaults:
     values:
       layout: "post"
 
-# Gallery collection defaults
+# Gallery collection settings
 collections:
   gallery:
     output: true
     permalink: /gallery/:title/
 
+# Gallery posts defaults (UPDATED)
 defaults:
   - scope:
       path: ""
       type: "gallery"
     values:
-      layout: "gallery_posts"
+      layout: "gallery_post"
